@@ -16,8 +16,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Cargar productos o usar mock data si está vacío
     let products = JSON.parse(localStorage.getItem('productos')) || [
-        { id: '1', nombre: 'Jarrón de Talavera Azul', descripcion: 'Elegante jarrón pintado a mano con motivos florales tradicionales de Puebla.', precio: 1250.00, imageUrl: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Talavera+1' },
-        { id: '2', nombre: 'Plato Decorativo Colonial', descripcion: 'Plato de cerámica de Talavera, perfecto para decorar cualquier pared o mesa con estilo.', precio: 850.50, imageUrl: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Talavera+2' }
+         { id: '1', nombre: 'Jarrón de Talavera Azul', descripcion: 'Elegante jarrón pintado a mano con motivos florales tradicionales de Puebla.', precio: 1250.00, imageUrl: 'https://www.talaveradelaluz.com/wp-content/uploads/2024/05/5-Jarron-nervadura-copia.jpg' },
+        { id: '2', nombre: 'Plato Decorativo Colonial', descripcion: 'Plato de cerámica de Talavera, perfecto para decorar cualquier pared o mesa con estilo.', precio: 850.50, imageUrl: 'https://ranchomx.co/wp-content/uploads/108.jpg' }
     ];
 
     function saveProducts() {
