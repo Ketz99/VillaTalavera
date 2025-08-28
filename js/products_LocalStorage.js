@@ -1,10 +1,10 @@
 document.addEventListener('DOMContentLoaded', () => {
     // Datos de ejemplo para simular los productos
     const mockProducts = [
-        { id: '1', nombre: 'Jarrón de Talavera Azul', descripcion: 'Elegante jarrón pintado a mano con motivos florales tradicionales de Puebla.', precio: 1250.00, imageUrl: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Talavera+1' },
-        { id: '2', nombre: 'Plato Decorativo Colonial', descripcion: 'Plato de cerámica de Talavera, perfecto para decorar cualquier pared o mesa con estilo.', precio: 850.50, imageUrl: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Talavera+2' },
-        { id: '3', nombre: 'Maceta Grande "El Sol"', descripcion: 'Maceta de gran tamaño ideal para plantas de interior o exterior, con un diseño vibrante.', precio: 1800.00, imageUrl: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Talavera+3' },
-        { id: '4', nombre: 'Juego de Tazas "Amanecer"', descripcion: 'Set de cuatro tazas para café o té, cada una con un diseño único y colorido para alegrar tus mañanas.', precio: 950.00, imageUrl: 'https://placehold.co/600x400/3B82F6/FFFFFF?text=Talavera+4' }
+        { id: '1', nombre: 'Jarrón de Talavera Azul', descripcion: 'Elegante jarrón pintado a mano con motivos florales tradicionales de Puebla.', precio: 1250.00, imageUrl: 'https://www.talaveradelaluz.com/wp-content/uploads/2024/05/5-Jarron-nervadura-copia.jpg' },
+        { id: '2', nombre: 'Plato Decorativo Colonial', descripcion: 'Plato de cerámica de Talavera, perfecto para decorar cualquier pared o mesa con estilo.', precio: 850.50, imageUrl: 'https://ranchomx.co/wp-content/uploads/108.jpg' },
+        { id: '3', nombre: 'Maceta Grande "El Sol"', descripcion: 'Maceta de gran tamaño ideal para plantas de interior o exterior, con un diseño vibrante.', precio: 1800.00, imageUrl: 'https://www.talaveracasaisidroyrafaela.com/cdn/shop/files/img337.jpg?v=1704846409' },
+        { id: '4', nombre: 'Juego de Tazas "Amanecer"', descripcion: 'Set de cuatro tazas para café o té, cada una con un diseño único y colorido para alegrar tus mañanas.', precio: 950.00, imageUrl: 'https://m.media-amazon.com/images/I/71+ubDy-F2L.jpg' }
     ];
 
     // Función para mostrar los productos en la página
