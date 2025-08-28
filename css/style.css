@@ -1,0 +1,23 @@
+/* Estilos personalizados para aplicar las fuentes */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #FDFBF8;
+    /* Un fondo cálido tipo papel amate */
+}
+
+h1,
+h2,
+h3,
+.font-lora {
+    font-family: 'Lora', serif;
+}
+
+/* Efecto de superposición en la galería */
+.gallery-item .overlay {
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+
+.gallery-item:hover .overlay {
+    opacity: 1;
+}

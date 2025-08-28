@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+
+<head>
+    <title>Corazón de México - Portafolio de Artesanías</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="img/icono-pestana.png" type="image/x-icon">
+    <!-- Google Fonts: Inter y Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <!-- AOS (Animate On Scroll) Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="text-gray-800">
+    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="flex items-center">
+                <img src="img/icono.png" alt="Icono de Villa Talavera" class="h-8 w-8 mr-2"> <!-- Icono -->
+                <span class="text-2xl font-bold font-lora text-blue-500">Villa Talavera</span>
+            </a>
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html" class="text-gray-600 hover:text-blue-500 transition duration-300">Inicio</a>
+                <a href="productos.html" class="text-blue-500 font-bold transition duration-300">Tienda</a>
+                <a href="index.html#historia" class="text-gray-600 hover:text-blue-500 transition duration-300">Nuestra
+                    Historia</a>
+                <a href="index.html#contacto"
+                    class="text-gray-600 hover:text-blue-500 transition duration-300">Contacto</a>
+            </div>
+        </nav>
+    </header>
+    <main class="py-20 md:py-28">
+        <div class="container mx-auto px-6">
+            <div class="text-center mb-12">
+                <h1 class="text-4xl font-bold font-lora text-blue-500">Nuestras Artesanías</h1>
+                <p class="text-lg text-gray-600 mt-2">Piezas únicas, hechas con el alma de México.</p>
+            </div>
+            <!-- Contenedor de productos que se llenará con Firebase -->
+            <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8">
+                <!-- Los productos se cargarán aquí dinámicamente -->
+                <p id="loading-message" class="col-span-full text-center text-gray-500">Cargando productos...</p>
+            </div>
+        </div>
+    </main>
+    <footer class="bg-gray-800 text-white">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="font-lora text-lg">&copy; 2024 Corazón de México. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+    <!-- Firebase SDKs -->
+    <!-- <script src="js/products_FireBase.js" type="module"></script> -->
+    <script src="js/products_LocalStorage.js" type="module"></script>
+</body>
+
+</html>

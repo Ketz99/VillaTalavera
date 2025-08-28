@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+   <title>Corazón de México - Portafolio de Artesanías</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Favicon -->
+    <link rel="icon" href="img/icono-pestana.png" type="image/x-icon">
+    <!-- Google Fonts: Inter y Lora -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+        rel="stylesheet">
+    <!-- AOS (Animate On Scroll) Library CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+</head>
+
+<body class="text-gray-800 bg-gray-50 min-h-screen">
+
+    <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
+        <h1 class="text-3xl sm:text-4xl font-bold font-lora text-blue-600 mb-8 text-center sm:text-left">Panel de
+            Administración</h1>
+
+        <!-- Formulario para agregar y editar productos -->
+        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md mb-10 transition-all duration-300">
+            <h2 id="form-title" class="text-xl sm:text-2xl font-bold font-lora mb-6 text-gray-800">Agregar Nuevo
+                Producto
+            </h2>
+            <form id="product-form" class="space-y-4 sm:space-y-6">
+                <input type="hidden" id="productId">
+
+                <div class="space-y-2">
+                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre del Producto</label>
+                    <input type="text" id="nombre" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base">
+                </div>
+
+                <div class="space-y-2">
+                    <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
+                    <textarea id="descripcion" rows="4" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base"></textarea>
+                </div>
+
+                <div class="space-y-2">
+                    <label for="precio" class="block text-sm font-medium text-gray-700">Precio (COP)</label>
+                    <input type="number" id="precio" step="0.01" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base">
+                </div>
+
+                <div class="space-y-2">
+                    <label for="imageUrl" class="block text-sm font-medium text-gray-700">URL de la Imagen</label>
+                    <input type="url" id="imageUrl" placeholder="https://ejemplo.com/imagen.jpg" required
+                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base">
+                </div>
+
+                <div class="flex flex-col sm:flex-row gap-4 pt-2">
+                    <button type="submit" id="submit-button"
+                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm sm:text-base">
+                        Agregar Producto
+                    </button>
+                    <button type="button" id="cancel-edit"
+                        class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 hidden text-sm sm:text-base">
+                        Cancelar Edición
+                    </button>
+                </div>
+            </form>
+
+            <div id="feedback-message"
+                class="mt-4 text-center p-3 rounded-md opacity-0 transition-opacity duration-300 text-sm"></div>
+        </div>
+
+        <!-- Lista de productos existentes -->
+        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md">
+            <h2 class="text-xl sm:text-2xl font-bold font-lora mb-6 text-gray-800">Productos Actuales</h2>
+            <div id="admin-product-list" class="space-y-6">
+                <!-- Los productos se cargarán aquí -->
+                <p class="text-center text-gray-500 py-8">Cargando productos...</p>
+            </div>
+        </div>
+    </div>
+    <script src="js/products_CRUD_LocalStorage.js"> </script>
+
+
+    <!-- ================================================================
+    SCRIPT DE FIREBASE (PARA USO FUTURO)
+    ================================================================
+    
+    <script src="js/products_CRUD_FireBase.js" type="module">
+        
+    </script> -->
+
+</body>
+
+</html>
