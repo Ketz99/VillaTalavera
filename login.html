@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión - Villa Talavera</title>
+    <link rel="stylesheet" href="css/login.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>    
+</head>
+<body>
+
+    <div class="auth-container">
+        <a href="index.html" class="back-btn"><i class="fa-solid fa-house"></i></a>
+        
+        <div class="auth-logo">
+            <a href="index.html">
+                <img src="img/icono.png" alt="Logo Villa Talavera">
+            </a>
+        </div>
+
+        <!-- Formulario de Inicio de Sesión -->
+        <form id="login-form" class="auth-form">
+            <h2>Acceso de Administrador</h2>
+            <div class="input-group">
+                <label for="login-email">Correo Electrónico</label>
+                <input type="email" id="login-email" required>
+            </div>
+            <div class="input-group">
+                <label for="login-password">Contraseña</label>
+                <input type="password" id="login-password" required>
+            </div>
+            <button type="submit" class="auth-btn">Ingresar</button>
+        </form>
+
+        <div id="auth-message" class="auth-message"></div>
+
+    </div>
+
+    <script src="js/supabaseClient.js"></script>
+    <script type="module" src="js/auth.js"></script>
+
+</body>
+</html>
+

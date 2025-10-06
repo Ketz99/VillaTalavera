@@ -2,95 +2,312 @@
 <html lang="es">
 
 <head>
-   <title>Corazón de México - Portafolio de Artesanías</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon -->
-    <link rel="icon" href="img/icono-pestana.png" type="image/x-icon">
-    <!-- Google Fonts: Inter y Lora -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administración - Villa Talavera</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&family=Roboto:wght@400&display=swap"
         rel="stylesheet">
-    <!-- AOS (Animate On Scroll) Library CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="css/admin.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body class="text-gray-800 bg-gray-50 min-h-screen">
+<body>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
-    <div class="container mx-auto px-4 py-8 sm:px-6 lg:px-8">
-        <h1 class="text-3xl sm:text-4xl font-bold font-lora text-blue-600 mb-8 text-center sm:text-left">Panel de
-            Administración</h1>
 
-        <!-- Formulario para agregar y editar productos -->
-        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md mb-10 transition-all duration-300">
-            <h2 id="form-title" class="text-xl sm:text-2xl font-bold font-lora mb-6 text-gray-800">Agregar Nuevo
-                Producto
-            </h2>
-            <form id="product-form" class="space-y-4 sm:space-y-6">
-                <input type="hidden" id="productId">
+    <header class="site-header">
 
-                <div class="space-y-2">
-                    <label for="nombre" class="block text-sm font-medium text-gray-700">Nombre del Producto</label>
-                    <input type="text" id="nombre" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base">
-                </div>
-
-                <div class="space-y-2">
-                    <label for="descripcion" class="block text-sm font-medium text-gray-700">Descripción</label>
-                    <textarea id="descripcion" rows="4" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base"></textarea>
-                </div>
-
-                <div class="space-y-2">
-                    <label for="precio" class="block text-sm font-medium text-gray-700">Precio (COP)</label>
-                    <input type="number" id="precio" step="0.01" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base">
-                </div>
-
-                <div class="space-y-2">
-                    <label for="imageUrl" class="block text-sm font-medium text-gray-700">URL de la Imagen</label>
-                    <input type="url" id="imageUrl" placeholder="https://ejemplo.com/imagen.jpg" required
-                        class="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors duration-200 text-sm sm:text-base">
-                </div>
-
-                <div class="flex flex-col sm:flex-row gap-4 pt-2">
-                    <button type="submit" id="submit-button"
-                        class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 text-sm sm:text-base">
-                        Agregar Producto
-                    </button>
-                    <button type="button" id="cancel-edit"
-                        class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-3 px-6 rounded-lg transition duration-300 ease-in-out transform hover:scale-[1.02] focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 hidden text-sm sm:text-base">
-                        Cancelar Edición
-                    </button>
-                </div>
-            </form>
-
-            <div id="feedback-message"
-                class="mt-4 text-center p-3 rounded-md opacity-0 transition-opacity duration-300 text-sm"></div>
-        </div>
-
-        <!-- Lista de productos existentes -->
-        <div class="bg-white p-6 sm:p-8 rounded-lg shadow-md">
-            <h2 class="text-xl sm:text-2xl font-bold font-lora mb-6 text-gray-800">Productos Actuales</h2>
-            <div id="admin-product-list" class="space-y-6">
-                <!-- Los productos se cargarán aquí -->
-                <p class="text-center text-gray-500 py-8">Cargando productos...</p>
+        <div class="top-bar">
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
             </div>
         </div>
-    </div>
-    <script src="js/products_CRUD_LocalStorage.js"> </script>
 
+        <div class="main-header-container">
+            <div class="header-icon-left">
+                <a href="#" aria-label="Buscar"><i class="fa-solid fa-magnifying-glass"></i></a>
+            </div>
 
-    <!-- ================================================================
-    SCRIPT DE FIREBASE (PARA USO FUTURO)
-    ================================================================
-    
-    <script src="js/products_CRUD_FireBase.js" type="module">
-        
-    </script> -->
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="img/icono.png" alt="Logo de Villa Talavera" class="logo-image">
+                </a>
+            </div>
 
+            <div class="header-icon-right">
+                <a href="#" aria-label="Mi Cuenta"><i class="fa-regular fa-user"></i></a>
+            </div>
+
+            <!-- Botón hamburguesa -->
+            <button class="hamburger-btn" aria-label="Abrir menú">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+
+        <nav class="main-nav">
+            <ul>
+                <li><a href="#!" data-target="products-section">PRODUCTOS</a></li>
+                <li><a href="#!" data-target="categories-section">CATEGORÍAS</a></li>
+                <li><a href="#!" data-target="blog-section">BLOG</a></li>
+                <li><a href="#!" data-target="banners-section">BANNERS</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="container">
+        <div id="admin-menu" class="menu-grid">
+            <div class="menu-card" data-target="products-section">
+                <i class="fa-solid fa-cube menu-card-icon"></i>
+                <h3>Productos</h3>
+                <p>Añadir, editar y gestionar tu inventario de artesanías.</p>
+            </div>
+            <div class="menu-card" data-target="categories-section">
+                <i class="fa-solid fa-layer-group menu-card-icon"></i>
+                <h3>Categorías</h3>
+                <p>Organizar tus productos en diferentes categorías.</p>
+            </div>
+            <div class="menu-card" data-target="blog-section">
+                <i class="fa-solid fa-pen-nib menu-card-icon"></i>
+                <h3>Blog</h3>
+                <p>Crear y administrar las publicaciones de tu blog.</p>
+            </div>
+            <div class="menu-card" data-target="banners-section">
+                <i class="fa-solid fa-image menu-card-icon"></i>
+                <h3>Banners</h3>
+                <p>Gestionar los banners promocionales de la página de inicio.</p>
+            </div>
+        </div>
+
+        <section id="products-section" class="admin-section hidden">
+            <button class="back-to-menu-btn">&larr; Volver al Menú</button>
+
+            <h2>Inventario Actual</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Precio</th>
+                            <th>Stock</th>
+                            <th>Destacado</th> <!-- NUEVA COLUMNA -->
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inventory-table-body"></tbody>
+                </table>
+            </div>
+
+            <div class="form-container">
+                <h2 id="form-title">Agregar/Editar Producto</h2>
+                <form id="product-form">
+                    <input type="hidden" id="product-id">
+                    <input type="text" id="nombre" placeholder="Nombre del producto" required>
+                    <select id="product-category" required>
+                        <option value="">Cargando categorías...</option>
+                    </select>
+                    <textarea id="descripcion" placeholder="Descripción"></textarea>
+                    <input type="number" id="precio" placeholder="Precio" step="0.01" required>
+                    <input type="number" id="stock" placeholder="Stock" required>
+                    
+                    <!-- NUEVO CAMPO PARA DESTACADO -->
+                    <select id="destacado" required>
+                        <option value="false">No destacado</option>
+                        <option value="true">Sí, destacar producto</option>
+                    </select>
+
+                    <label for="product-image">Añadir nueva imagen:</label>
+                    <input type="file" id="product-image" accept="image/png, image/jpeg">
+                    <div class="form-buttons">
+                        <button type="submit" id="save-button">Guardar</button>
+                        <button type="button" id="cancel-button" class="hidden">Cancelar Edición</button>
+                    </div>
+                </form>
+                <div id="image-management-section" class="hidden">
+                    <h3>Imágenes Actuales</h3>
+                    <div id="current-images-container" class="image-gallery"></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="categories-section" class="admin-section hidden">
+            <button class="back-to-menu-btn">&larr; Volver al Menú</button>
+            <h2>Categorías Actuales</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="category-table-body"></tbody>
+                </table>
+            </div>
+            <div class="form-container">
+                <h2 id="category-form-title">Agregar/Editar Categoría</h2>
+                <form id="category-form">
+                    <input type="hidden" id="category-id">
+                    <input type="text" id="category-name" placeholder="Nombre de la categoría" required>
+                    <textarea id="category-description" placeholder="Descripción de la categoría"></textarea>
+                    <div id="category-image-preview-container" class="hidden">
+                        <p>Imagen actual:</p>
+                        <div class="image-thumbnail">
+                            <img id="current-category-image" src="" alt="Imagen actual de la categoría">
+                            <button type="button" id="delete-category-image-btn" class="delete-btn">X</button>
+                        </div>
+                    </div>
+                    <label for="category-image">Imagen de la categoría:</label>
+                    <input type="file" id="category-image" accept="image/png, image/jpeg">
+                    <div class="form-buttons">
+                        <button type="submit" id="save-category-button">Guardar Categoría</button>
+                        <button type="button" id="cancel-category-button" class="hidden">Cancelar Edición</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="blog-section" class="admin-section hidden">
+            <button class="back-to-menu-btn">&larr; Volver al Menú</button>
+            <h2>Publicaciones del Blog</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Título</th>
+                            <th>Estado</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="blog-table-body"></tbody>
+                </table>
+            </div>
+            <div class="form-container">
+                <h2 id="blog-form-title">Agregar/Editar Publicación</h2>
+                <form id="blog-form">
+                    <input type="hidden" id="post-id">
+                    <input type="text" id="post-title" placeholder="Título de la Publicación" required>
+                    <textarea id="post-summary" placeholder="Resumen corto (para la vista previa)" rows="3"></textarea>
+                    <textarea id="post-content" placeholder="Contenido completo de la publicación..."
+                        rows="10"></textarea>
+                    <select id="post-status" required>
+                        <option value="borrador">Borrador</option>
+                        <option value="publicado">Publicado</option>
+                    </select>
+                    <div id="post-image-preview-container" class="hidden">
+                        <p>Imagen destacada actual:</p>
+                        <div class="image-thumbnail">
+                            <img id="current-post-image" src="" alt="Imagen destacada actual">
+                            <button type="button" id="delete-post-image-btn" class="delete-btn">X</button>
+                        </div>
+                    </div>
+                    <label for="post-image">Imagen destacada:</label>
+                    <input type="file" id="post-image" accept="image/png, image/jpeg">
+                    <div class="form-buttons">
+                        <button type="submit" id="save-post-button">Guardar Publicación</button>
+                        <button type="button" id="cancel-post-button" class="hidden">Cancelar Edición</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <section id="banners-section" class="admin-section hidden">
+            <button class="back-to-menu-btn">&larr; Volver al Menú</button>
+            <h2>Banners Actuales</h2>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Imagen</th>
+                            <th>Título</th>
+                            <th>Enlace</th>
+                            <th>Activo</th>
+                            <th>Orden</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="banner-table-body"></tbody>
+                </table>
+            </div>
+            <div class="form-container">
+                <h2 id="banner-form-title">Agregar/Editar Banner</h2>
+                <form id="banner-form">
+                    <input type="hidden" id="banner-id">
+                    <input type="text" id="banner-title" placeholder="Título del Banner (ej. 'Nuevos Colibríes')">
+                    <textarea id="banner-subtitle" placeholder="Subtítulo (ej. 'Hechos a mano en Tonalá')"
+                        rows="2"></textarea>
+                    <input type="url" id="banner-link" placeholder="Enlace de destino (ej. /productos/talavera)">
+                    <input type="number" id="banner-order" placeholder="Orden de aparición (ej. 1, 2, 3...)">
+                    <div class="checkbox-container">
+                        <input type="checkbox" id="banner-active" checked>
+                        <label for="banner-active">Mostrar este banner en la página de inicio</label>
+                    </div>
+                    <div id="banner-image-preview-container" class="hidden">
+                        <p>Imagen actual del banner:</p>
+                        <div class="image-thumbnail">
+                            <img id="current-banner-image" src="" alt="Imagen actual del banner">
+                        </div>
+                    </div>
+                    <label for="banner-image">Imagen del banner (obligatoria):</label>
+                    <input type="file" id="banner-image" accept="image/png, image/jpeg">
+                    <div class="form-buttons">
+                        <button type="submit" id="save-banner-button">Guardar Banner</button>
+                        <button type="button" id="cancel-banner-button" class="hidden">Cancelar Edición</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <div class="footer-container">
+
+            <div class="footer-column footer-links">
+                <h4>Información</h4>
+                <ul>
+                    <li><a href="/busqueda">Búsqueda</a></li>
+                    <li><a href="/terminos">Términos y Condiciones</a></li>
+                    <li><a href="/contacto">Contacto</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-column footer-subscribe">
+                <h4>SUSCRÍBETE</h4>
+                <p>Suscríbete e infórmate de nuestras ofertas y novedades.</p>
+
+                <form class="subscribe-form">
+                    <input type="email" placeholder="Suscríbete a nuestra lista de correo">
+                    <button type="submit" aria-label="Suscribirse">
+                        <i class="fa-regular fa-envelope"></i>
+                    </button>
+                </form>
+
+                <div class="footer-social">
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-column footer-logo">
+                <div class="logo-circle">
+                    <img src="img/icono.png" alt="Logo de Villa Talavera">
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/admin.js"></script>
 </body>
 
 </html>

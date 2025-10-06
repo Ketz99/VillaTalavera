@@ -1,214 +1,63 @@
 <!DOCTYPE html>
-<html lang="es" class="scroll-smooth">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Corazón de México - Portafolio de Artesanías</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Favicon -->
-    <link rel="icon" href="img/icono-pestana.png" type="image/x-icon">
-    <!-- Google Fonts: Inter y Lora -->
+    <title>Villa Talavera</title>
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Lora:ital,wght@0,400..700;1,400..700&display=swap"
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&family=Roboto:wght@400&display=swap"
         rel="stylesheet">
-    <!-- AOS (Animate On Scroll) Library CSS -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 
-<body class="text-gray-800">
-    <header class="bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="flex items-center">
-                <img src="img/icono.png" alt="Icono de Villa Talavera" class="h-8 w-8 mr-2"> <!-- Icono -->
-                <span class="text-2xl font-bold font-lora text-blue-500">Villa Talavera</span>
-            </a>
-            <div class="hidden md:flex space-x-8">
-                <a href="#productos" class="text-gray-600 hover:text-amber-800 transition duration-300">Productos</a>
-                <a href="#historia" class="text-gray-600 hover:text-amber-800 transition duration-300">Nuestra
-                    Historia</a>
-                <a href="#contacto" class="text-gray-600 hover:text-amber-800 transition duration-300">Contacto</a>
+<body>
+
+
+
+
+
+    <div id="banner-principal"></div>
+    <section class="featured-products-section">
+        <h2 class="section-title">MÁS VENDIDOS</h2>
+        <a href="productos.html" class="section-btn">TODOS</a>
+        <div class="carousel-container">
+            <div id="featured-products-carousel" class="carousel-track">
+                <!-- Los productos destacados se cargarán aquí -->
             </div>
-            <!-- Menú Móvil (Opcional, se puede agregar JS para funcionalidad) -->
-            <div class="md:hidden">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-600" fill="none" viewBox="0 0 24 24"
-                    stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
-                </svg>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <!-- Sección Hero -->
-        <section class="h-screen min-h-[600px] flex items-center justify-center bg-cover bg-center bg-fixed relative"
-            style="background-image: url('https://png.pngtree.com/background/20220727/original/pngtree-mexican-talavera-ceramic-tile-pattern-picture-image_1842820.jpg');">
-            <div class="bg-black/50 absolute inset-0"></div>
-            <div class="text-center text-white z-10 p-4">
-                <h1 class="text-5xl md:text-7xl font-bold font-lora leading-tight mb-4">El Alma de Nuestra Cultura,</h1>
-                <p class="text-xl md:text-2xl font-light">Hecha a mano, con el corazón.</p>
-            </div>
-        </section>
-        <!-- Sección Productos -->
-        <section id="productos" class="py-20 md:py-28 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="text-center mb-12" data-aos="fade-up">
-                    <h2 class="text-4xl font-bold font-lora text-blue-500">Nuestros Productos</h2>
-                    <p class="text-lg text-gray-600 mt-2">Un viaje visual por la riqueza artesanal de México.</p>
-                </div>
-                <!-- Grid de la galería -->
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-                    <!-- Item 1: Alebrijes -->
-                    <div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up">
-                        <a href="productos.html">
-                            <img src="https://cdn.prod.website-files.com/65441775eadc83ef91876793/675cae0bb25c3db777454adc_cover.jpg"
-                                alt="Alebrijes coloridos de Oaxaca"
-                                class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out">
-                            <div class="overlay absolute inset-0 bg-black/60 flex items-center justify-center">
-                                <h3 class="text-white text-2xl font-bold font-lora">Alebrijes de Oaxaca</h3>
-                            </div>
-                        </a>
-                    </div>
-                    <!-- Item 2: Talavera -->
-                    <div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <img src="https://gustoxmexico.com/images/talavera-puebla.webp"
-                            alt="Platos de cerámica de Talavera"
-                            class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out">
-                        <div class="overlay absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <h3 class="text-white text-2xl font-bold font-lora">Talavera Poblana</h3>
-                        </div>
-                    </div>
-                    <!-- Item 3: Textiles -->
-                    <div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <img src="https://www.chiapasparalelo.com/wp-content/uploads/2020/04/Foto-2-9-1.jpg"
-                            alt="Textiles bordados a mano"
-                            class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out">
-                        <div class="overlay absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <h3 class="text-white text-2xl font-bold font-lora">Textiles de Chiapas</h3>
-                        </div>
-                    </div>
-                    <!-- Item 4: Barro Negro -->
-                    <div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up">
-                        <img src="https://tekiti.mx/wp-content/uploads/2024/03/tekiti_experiencias_mexicanas_artesanias_mexico_barro_negro_oaxaca_05.jpg"
-                            alt="Vasijas de barro negro"
-                            class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out">
-                        <div class="overlay absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <h3 class="text-white text-2xl font-bold font-lora">Barro Negro</h3>
-                        </div>
-                    </div>
-                    <!-- Item 5: Cestería -->
-                    <div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up"
-                        data-aos-delay="100">
-                        <img src="https://www.chiapasparalelo.com/wp-content/uploads/2020/08/WhatsApp-Image-2020-08-13-at-23.18.12.jpeg"
-                            alt="Canastas de palma tejidas"
-                            class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out">
-                        <div class="overlay absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <h3 class="text-white text-2xl font-bold font-lora">Cestería de Palma</h3>
-                        </div>
-                    </div>
-                    <!-- Item 6: Árbol de la Vida -->
-                    <div class="gallery-item group relative overflow-hidden rounded-lg shadow-lg" data-aos="fade-up"
-                        data-aos-delay="200">
-                        <img src="https://caracolpurpura.com.mx/cdn/shop/files/Photoroom_20240424_171847.jpg?v=1713997182"
-                            alt="Árbol de la vida de Metepec"
-                            class="w-full h-80 object-cover transform group-hover:scale-110 transition duration-500 ease-in-out">
-                        <div class="overlay absolute inset-0 bg-black/60 flex items-center justify-center">
-                            <h3 class="text-white text-2xl font-bold font-lora">Árbol de la Vida</h3>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Sección Nuestra Historia -->
-        <section id="historia" class="bg-white py-20 md:py-28 overflow-hidden">
-            <div class="container mx-auto px-6">
-                <div class="flex flex-col md:flex-row items-center gap-10 md:gap-16">
-                    <div class="md:w-1/2" data-aos="fade-right">
-                        <img src="img/manos.png" alt="Manos de un artesano trabajando"
-                            class="rounded-lg shadow-xl w-full">
-                    </div>
-                    <div class="md:w-1/2 text-center md:text-left" data-aos="fade-left">
-                        <h2 class="text-4xl font-bold font-lora text-blue-500 mb-4">Manos que Cuentan Historias</h2>
-                        <p class="text-gray-600 leading-relaxed mb-4">
-                            En Corazón de México, creemos que cada pieza artesanal es un fragmento de nuestra historia.
-                            Trabajamos directamente con familias de artesanos de todo el país para preservar las
-                            técnicas ancestrales y llevar a tu hogar una obra de arte única, llena de tradición y amor.
-                        </p>
-                        <p class="text-gray-600 leading-relaxed">
-                            Nuestra misión es celebrar la creatividad y el talento de los maestros artesanos, asegurando
-                            un comercio justo que honre su invaluable legado cultural.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-        <!-- Sección Contacto -->
-        <section id="contacto" class="py-20 md:py-28">
-            <div class="container mx-auto px-6 flex flex-col md:flex-row items-center justify-between"
-                data-aos="fade-up">
-                <div class="md:w-1/2 text-center md:text-left mb-8 md:mb-0">
-                    <h2 class="text-4xl font-bold font-lora text-blue-500 mb-4">¿Interesado en una pieza única?</h2>
-                    <p class="text-lg text-gray-600 max-w-2xl mx-auto mb-8">
-                        Nos encantaría escucharte. Contáctanos para colaboraciones, piezas personalizadas o para conocer
-                        más
-                        sobre el trabajo de nuestros artesanos.
-                    </p>
-                    <a href="mailto:hola@corazondemexico.com"
-                        class="bg-blue-800 text-white font-bold py-3 px-8 rounded-lg hover:bg-blue-500 transition duration-300 text-lg">
-                        Escríbenos
-                    </a>
-                </div>
-                <!-- Sección de Google Maps - Responsive -->
-                <div class="md:w-1/2 mt-10 md:mt-0 w-full">
-                    <div class="relative overflow-hidden pb-[75%] h-0 rounded-lg shadow-lg">
-                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg border-0"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3976.324094704242!2d-74.0723933!3d4.713652199999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e3f852921c96d83%3A0x9c6093690b43bb97!2sVilla%20Talavera%20Artesan%C3%ADas%20Mexicanas%20Sede%20Av%20Suba!5e0!3m2!1ses-419!2sco!4v1756362962815!5m2!1ses-419!2sco"
-                            allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                        </iframe>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white">
-        <div class="container mx-auto px-6 py-8 flex flex-col md:flex-row justify-between items-center">
-            <p class="font-lora text-lg">&copy; 2025 Villa Talavera, Julian David Gomez. Todos los derechos reservados.
-            </p>
-            <div class="flex space-x-6 mt-4 md:mt-0">
-                <!-- Iconos de redes sociales -->
-                <a href="#" aria-label="Instagram" class="hover:text-amber-300 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
-                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-                    </svg>
-                </a>
-                <a href="#" aria-label="Facebook" class="hover:text-amber-300 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path>
-                    </svg>
-                </a>
-                <a href="#" aria-label="Pinterest" class="hover:text-amber-300 transition duration-300">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path
-                            d="M21.2 15c-.2-1.3-1-3.2-1.2-4.2-.2-1.8 1-3.5 1-5.2 0-2.3-1.3-4.3-4-4.3-2.8 0-4.8 2.2-4.8 4.8 0 1 .3 2.2.8 3.1l-1.3 5c-.4 1.5-1.5 2.8-3 3.3-1.2.4-2.6.2-3.6-.8s-1.2-2.4-.8-3.6c.4-1.2 1.3-2.3 2.5-3 .7-.4 1.3-.2 1.6.4.3-.8.6-1.7.4-2.8-.2-1.3-1-2.5-2.2-3-1.5-1.8-4-1.5-5.2.5S1 10.8 2.5 12.3c.2.2.4.4.7.5l-1 4.5c-.2 1-.3 2.2.2 3.2.5 1 1.4 1.8 2.5 2.2 1.5.5 3.2.3 4.5-.8s2-2.8 2.5-4.2c.2-.5.3-1 .5-1.5s.3-.8.4-1.2c.2-.5.5-1 .8-1.3.6-.8 1.5-1.1 2.5-1.1.8 0 1.5.3 2 1 .5.5.8 1.3.6 2.2-.2 1-1 2.8-1.2 3.8-.2 1.3.5 2.5 2 3.1.7.3 1.5.2 2.2-.2.8-.4 1.3-1.2 1.5-2z">
-                        </path>
-                    </svg>
-                </a>
-            </div>
+            <button id="prev-btn" class="carousel-btn prev">&lt;</button>
+            <button id="next-btn" class="carousel-btn next">&gt;</button>
         </div>
-    </footer>
-    <!-- AOS (Animate On Scroll) Library JS -->
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script src="js/AOS.js"></script>
+
+    </section>
+
+    <section id="about-us-section">
+    <div class="sobre-nosotros-section">
+        <h2>Sobre Nosotros</h2>
+        <p>Villa Talavera es una empresa familiar dedicada a la venta de artesanías mexicanas, fundada en 1990 en la
+            ciudad de Bogotá. Nuestra misión es promover y preservar la rica tradición artesanal de México, ofreciendo
+            productos auténticos y de alta calidad que reflejan la diversidad cultural del país. Trabajamos directamente
+            con artesanos para garantizar que cada pieza cuente una historia única y apoye a las comunidades que las
+            crean. En Villa Talavera, nos enorgullece ser un puente entre los artesanos y los amantes del arte,
+            brindando una experiencia de compra que celebra la creatividad y el talento mexicano.</p>
+    </div>
+    </section>
+
+    <section id="categories-section">
+        <main class="container">
+            <div id="categorias-galeria" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8"></div>
+        </main>
+    </section>
+
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/index.js"></script>
+    <script type="module" src="js/cart.js"></script>
 </body>
 
 </html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalle del Producto - Villa Talavera</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600&family=Roboto:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <!-- Se reutiliza el CSS principal y se añade uno específico para el producto -->
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/producto.css">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+    <main id="product-detail-container" class="container">
+        <!-- El contenido se cargará aquí dinámicamente -->
+        <p class="loading-message">Cargando producto...</p>
+    </main>
+
+    <section id="related-products-section" class="featured-products-section hidden">
+        <h2 class="section-title">TAMBIÉN TE PODRÍA INTERESAR</h2>
+        <div class="carousel-container">
+            <div id="related-products-carousel" class="carousel-track">
+                <!-- Los productos relacionados se cargarán aquí -->
+            </div>
+        </div>
+    </section>
+
+    
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script type="module" src="js/producto.js"></script>
+</body>
+
+</html>
