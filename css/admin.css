@@ -84,6 +84,20 @@
     color: #b99d6b;
 }
 
+.logout-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #333;
+    font-size: 20px;
+    margin-left: 20px;
+    padding: 0;
+}
+
+.logout-btn:hover {
+    color: #b99d6b;
+}
+
 
 /* 3. Barra de navegación principal */
 .main-nav {

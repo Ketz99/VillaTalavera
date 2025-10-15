@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
         const id = productIdInput.value;
         const imageFile = productImageInput.files[0];
-        
+
         // MODIFICACIÓN: Se captura el valor booleano del campo "destacado"
         const productData = {
             nombre: document.getElementById('nombre').value,
@@ -489,7 +489,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Ocultamos todas las secciones al principio para empezar con una vista limpia
     hideAllSections();
 
-     // Evento para los enlaces del nav
+    // Evento para los enlaces del nav
     navLinks.forEach(link => {
         link.addEventListener('click', (event) => {
             event.preventDefault();
@@ -523,6 +523,34 @@ document.addEventListener('DOMContentLoaded', () => {
             hideAllSections();
         });
     });
+
+    // =================================================================
+    // LÓGICA PARA CERRAR SESIÓN
+    // =================================================================
+    const logoutButton = document.getElementById('logout-button');
+
+    if (logoutButton) {
+        logoutButton.addEventListener('click', async () => {
+            const { error } = await supabase.auth.signOut();
+            if (error) {
+                console.error('Error al cerrar sesión:', error);
+            } else {
+                // Redirigir a la página de inicio de sesión
+                window.location.href = 'login.html';
+            }
+        });
+    }
+
+    // Verificar sesión al cargar la página
+    (async () => {
+            // Revisa si hay una sesión activa con Supabase
+            const { data: { session } } = await supabase.auth.getSession();
+            if (!session) {
+                // Si NO hay sesión, redirige inmediatamente a la página de login
+                window.location.href = 'login.html';
+            }
+        })();
+
 });
 
 //botón hamburguesa
@@ -533,3 +561,4 @@ document.addEventListener('DOMContentLoaded', function () {
         mainNav.classList.toggle('open');
     });
 });
+

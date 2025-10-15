@@ -158,7 +158,8 @@ body {
 }
 
 .site-footer {
-    background: linear-gradient(135deg, #8B4513, #A0522D, #DEB887);
+    background: linear-gradient(135deg, #D50000, #E55900, #FFC300);
+    /* background: linear-gradient(135deg, #8B4513, #A0522D, #DEB887); */
     color: #fff;
     padding: 60px 20px 30px;
     font-size: 14px;
@@ -258,7 +259,7 @@ body {
 }
 
 .subscribe-form button {
-    background: #8B4513;
+    background: #c44a00;
     border: none;
     padding: 12px 20px;
     color: #DEB887;
@@ -270,7 +271,7 @@ body {
 }
 
 .subscribe-form button:hover {
-    background: #A0522D;
+    background: #E55900;
     color: #fff;
     transform: translateY(-2px);
 }
@@ -445,7 +446,7 @@ body {
 .main-banner-btn {
     display: inline-block;
     background: #fff;
-    color: #b99d6b;
+    color: #E55900;
     font-size: 1.1rem;
     font-family: 'Raleway', sans-serif;
     font-weight: 600;
@@ -458,7 +459,7 @@ body {
 }
 
 .main-banner-btn:hover {
-    background: #b99d6b;
+    background: #c44a00;
     color: #fff;
 }
 

@@ -19,7 +19,7 @@ header.innerHTML = `
 
     <div class="logo-container">
       <a href="index.html">
-        <img src="img/icono.png" alt="Logo de Villa Talavera" class="logo-image">
+        <img src="img/logo-largo.jpg" alt="Logo de Villa Talavera" class="logo-image">
       </a>
     </div>
 

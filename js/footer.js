@@ -36,7 +36,7 @@ footer.innerHTML = `
 
             <div class="footer-column footer-logo">
                 <div class="logo-circle">
-                    <img src="img/icono.png" alt="Logo de Villa Talavera">
+                    <img src="img/logo-corto.png" alt="Logo de Villa Talavera">
                 </div>
             </div>
 

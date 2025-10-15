@@ -94,13 +94,17 @@
 .checkout-btn {
     width: 100%;
     padding: 15px;
-    background-color: #D9822B;
+    background-color: #E55900;
     color: white;
     border: none;
     border-radius: 8px;
     font-size: 1.1rem;
     cursor: pointer;
     margin-top: 10px;
+}
+
+.checkout-btn:hover{
+    background-color: #c44a00;
 }
 
 #empty-cart-message {
