@@ -190,12 +190,44 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('resize', updateCarousel);
         updateCarousel();
     };
+    // --- LÓGICA PARA EL BLOG ---
+    const fetchAndDisplayBlogPosts = async () => {
+        const blogContainer = document.getElementById('blog-posts-container');
+        const blogSection = document.querySelector('.blog-section');
+
+        if (!blogContainer || !blogSection) return; // Guardián
+
+        const { data: posts, error } = await supabase
+            .from('blog_posts')
+            .select('id_post, titulo, imagen_destacada_url, slug')
+            .eq('estado', 'publicado')
+            .order('fecha_publicacion', { ascending: false })
+            .limit(3);
+
+        if (error || !posts || posts.length === 0) {
+            blogSection.style.display = 'none';
+            return;
+        }
+
+        blogContainer.innerHTML = '';
+        posts.forEach(post => {
+            const postCard = document.createElement('a');
+            postCard.href = `post.html?slug=${post.slug}`;
+            postCard.className = 'blog-post-card';
+            postCard.innerHTML = `
+                <img src="${post.imagen_destacada_url || 'https://via.placeholder.com/400x300'}" alt="${post.titulo}">
+                <h3>${post.titulo}</h3>
+            `;
+            blogContainer.appendChild(postCard);
+        });
+    };
 
 
     // --- LLAMADAS A LAS FUNCIONES ---
     initializeBannerSlideshow();
     fetchAndDisplayCategories();
     fetchAndDisplayFeaturedProducts();
+    fetchAndDisplayBlogPosts();
 
     // --- LÓGICA DEL MENÚ HAMBURGUESA ---
     const hamburgerBtn = document.querySelector('.hamburger-btn');

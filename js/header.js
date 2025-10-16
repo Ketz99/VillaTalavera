@@ -6,9 +6,9 @@ header.className = 'site-header';
 header.innerHTML = `
   <div class="top-bar">
     <div class="social-icons">
-      <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
-      <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-      <a href="#" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      <a href="https://www.instagram.com/villa.talavera/?hl=es" target="_blank" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+      <a href="https://www.facebook.com/villatalaveral/?locale=es_LA" target="_blank" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+      <a href="https://www.tiktok.com/@villatalavera" target="_blank" aria-label="Tiktok"><i class="fa-brands fa-tiktok"></i></a>
     </div>
   </div>
 

@@ -76,7 +76,7 @@ body {
 .auth-btn {
     width: 100%;
     padding: 14px;
-    background-color: var(--primary-color);
+    background: linear-gradient(90deg, #E55900 0%, #FFC300 100%);
     color: #fff;
     border: none;
     border-radius: 8px;
@@ -87,7 +87,7 @@ body {
 }
 
 .auth-btn:hover {
-    background-color: #c77420;
+    background: linear-gradient(90deg, #c44a00 0%, #dda900 100%);
 }
 
 .toggle-form-text {
@@ -144,7 +144,7 @@ body {
     left: 20px;
     display: inline-block;
     padding: 8px 16px;
-    background-color: var(--primary-color);
+    background: linear-gradient(90deg, #E55900 0%, #FFC300 100%);
     color: #f8f8f8;
     text-decoration: none;
     border-radius: 8px;

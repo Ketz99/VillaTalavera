@@ -726,6 +726,49 @@ body {
     right: 8px;
 }
 
+/* --- ESTILOS PARA LA SECCIÓN DEL BLOG --- */
+.blog-section {
+    text-align: center;
+    padding: 50px 5%;
+    background-color: #f9f9f9; /* Un fondo ligeramente diferente para separar */
+}
+
+.blog-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 40px auto 0;
+}
+
+.blog-post-card {
+    background-color: #fff;
+    text-align: left;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-post-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.blog-post-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-post-card h3 {
+    font-family: 'Raleway', sans-serif;
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
 
 /* --- ESTILOS PARA MÓVILES (DISEÑO RESPONSIVO) --- */
 @media (max-width: 768px) {
