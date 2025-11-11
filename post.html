@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="post-title">Cargando Post | Villa Talavera</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;600;700&family=Roboto:wght@400&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="stylesheet" href="css/index.css"> 
+    <link rel="shortcut icon" href="img/logo-corto.png" type="image/x-icon">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+
+<body>
+
+    <header class="site-header"></header>
+
+    <main class="post-main-content">
+        
+        <article id="single-post-container" class="blog-post-detail">
+            <div class="loading-state">
+                <p>Cargando publicación...</p>
+                <i class="fas fa-spinner fa-spin"></i>
+            </div>
+        </article>
+
+        <aside class="related-posts-section">
+            <h3 class="section-title-small">También te puede interesar</h3>
+            <div id="related-posts-grid" class="blog-posts-grid-small">
+                </div>
+            <div class="back-to-blog-link">
+                <a href="blog.html" class="section-btn back-btn-detail">← Volver a todas las Publicaciones</a>
+            </div>
+        </aside>
+    </main>
+
+    <footer class="site-footer"></footer>
+
+    <script src="js/header.js"></script>
+    <script src="js/footer.js"></script>
+    <script src="js/supabaseClient.js"></script>
+    <script src="js/post.js"></script> </body>
+
+</html>

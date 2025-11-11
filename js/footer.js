@@ -13,6 +13,7 @@ footer.innerHTML = `
                     <li><a href="/busqueda">Búsqueda</a></li>
                     <li><a href="/terminos">Términos y Condiciones</a></li>
                     <li><a href="/contacto">Contacto</a></li>
+                    <li><a href="blog.html">Blog</a></li>
                 </ul>
             </div>
 
