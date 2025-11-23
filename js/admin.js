@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const productFormTitle = document.getElementById('form-title');
     const productIdInput = document.getElementById('product-id');
     const productCategorySelect = document.getElementById('product-category');
+    const productCountrySelect = document.getElementById('product-country');
     const productSaveButton = document.getElementById('save-button');
     const productCancelButton = document.getElementById('cancel-button');
     // // Seleccionamos los elementos con los que vamos a trabajar
@@ -153,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precio: parseFloat(document.getElementById('precio').value),
             stock: parseInt(document.getElementById('stock').value),
             id_categoria: parseInt(productCategorySelect.value),
+            id_pais: productCountrySelect.value,
             destacado: document.getElementById('destacado').value === 'true' // Convierte el string a booleano
         };
 
@@ -412,7 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (target.classList.contains('edit-btn')) {
-            // Oculta el menú de las cartas al editar
             menuGrid.classList.add('hidden');
             switch (type) {
                 case 'product':
@@ -425,6 +426,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('stock').value = productData.stock;
                         productCategorySelect.value = productData.id_categoria;
                         // MODIFICACIÓN: Se asigna el valor de "destacado" al formulario
+                        if(productData.id_pais) {
+                             productCountrySelect.value = productData.id_pais;
+                        } else {
+                             productCountrySelect.value = ""; // Reset si es nulo
+                        }
+
                         document.getElementById('destacado').value = productData.destacado;
                         productFormTitle.textContent = 'Editar Producto';
                         productCancelButton.classList.remove('hidden');
@@ -748,11 +755,40 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    // =================================================================
+    // ✅ LÓGICA PARA PAÍSES (NUEVO BLOQUE)
+    // =================================================================
+    const populateCountryDropdown = (countries) => {
+        productCountrySelect.innerHTML = '<option value="" disabled selected>Selecciona el país de origen</option>';
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.id; // Usamos el UUID del país
+            option.textContent = country.nombre;
+            productCountrySelect.appendChild(option);
+        });
+    };
+
+    const fetchCountries = async () => {
+        // Obtenemos id y nombre de la tabla paises
+        const { data, error } = await supabase
+            .from('paises')
+            .select('id, nombre')
+            .order('nombre', { ascending: true });
+            
+        if (error) {
+            console.error('Error fetching countries:', error);
+        } else {
+            populateCountryDropdown(data);
+        }
+    };
+
+
     // --- CARGA INICIAL ---
     fetchProducts();
     fetchCategories();
     fetchBlogPosts();
     fetchBanners();
+    fetchCountries();
     fetchAndDisplayCountries();
 });
 // =================================================================
