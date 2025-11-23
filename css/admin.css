@@ -71,7 +71,7 @@ main {
 
 .menu-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     /* Siempre 4 columnas en desktop */
     gap: 32px;
     margin: 40px 0;

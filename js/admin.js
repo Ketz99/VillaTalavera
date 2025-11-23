@@ -8,8 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const productFormTitle = document.getElementById('form-title');
     const productIdInput = document.getElementById('product-id');
     const productCategorySelect = document.getElementById('product-category');
+    const productCountrySelect = document.getElementById('product-country');
     const productSaveButton = document.getElementById('save-button');
     const productCancelButton = document.getElementById('cancel-button');
+    // // Seleccionamos los elementos con los que vamos a trabajar
+    const navLinks = document.querySelectorAll('.main-nav a[data-target]');
+    const adminSections = document.querySelectorAll('.admin-section');
+    const backToMenuButtons = document.querySelectorAll('.back-to-menu-btn');
+    const menuGrid = document.getElementById('admin-menu');
+    const menuCards = document.querySelectorAll('.menu-card[data-target]');
 
     const categoryForm = document.getElementById('category-form');
     const categoryTableBody = document.getElementById('category-table-body');
@@ -23,6 +30,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const categoryImagePreviewContainer = document.getElementById('category-image-preview-container');
     const currentCategoryImage = document.getElementById('current-category-image');
     const deleteCategoryImageBtn = document.getElementById('delete-category-image-btn');
+
+    // --- Referencias a elementos del DOM (Navegación) ---
+    const hamburgerBtn = document.querySelector('.hamburger-btn');
+    const mainNav = document.querySelector('.main-nav');
 
     // --- Referencias DOM para Blog ---
     const blogForm = document.getElementById('blog-form');
@@ -53,6 +64,25 @@ document.addEventListener('DOMContentLoaded', () => {
     const bannerImagePreviewContainer = document.getElementById('banner-image-preview-container');
     const currentBannerImage = document.getElementById('current-banner-image');
     const cancelBannerButton = document.getElementById('cancel-banner-button');
+
+    // --- Referencias a elementos del DOM (Países) ---
+    const countryForm = document.getElementById('country-form');
+    const countryTableBody = document.getElementById('country-table-body');
+    const countryFormTitle = document.getElementById('country-form-title');
+    const countryIdInput = document.getElementById('country-id');
+    const countryNameInput = document.getElementById('country-name');
+    const countryImageInput = document.getElementById('country-image');
+    const countrySaveButton = document.getElementById('save-country-button');
+    const countryCancelButton = document.getElementById('cancel-country-button');
+    const currentCountryImage = document.getElementById('current-country-image');
+    const countryImagePreviewContainer = document.getElementById('country-image-preview-container');
+
+    // =================================================================
+    // LÓGICA PARA NAVEGACIÓN
+    // =================================================================
+    hamburgerBtn.addEventListener('click', function () {
+        mainNav.classList.toggle('open');
+    });
 
     // =================================================================
     // LÓGICA PARA IMÁGENES DE PRODUCTOS
@@ -124,6 +154,7 @@ document.addEventListener('DOMContentLoaded', () => {
             precio: parseFloat(document.getElementById('precio').value),
             stock: parseInt(document.getElementById('stock').value),
             id_categoria: parseInt(productCategorySelect.value),
+            id_pais: productCountrySelect.value,
             destacado: document.getElementById('destacado').value === 'true' // Convierte el string a booleano
         };
 
@@ -383,7 +414,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (target.classList.contains('edit-btn')) {
-            // Oculta el menú de las cartas al editar
             menuGrid.classList.add('hidden');
             switch (type) {
                 case 'product':
@@ -396,6 +426,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         document.getElementById('stock').value = productData.stock;
                         productCategorySelect.value = productData.id_categoria;
                         // MODIFICACIÓN: Se asigna el valor de "destacado" al formulario
+                        if(productData.id_pais) {
+                             productCountrySelect.value = productData.id_pais;
+                        } else {
+                             productCountrySelect.value = ""; // Reset si es nulo
+                        }
+
                         document.getElementById('destacado').value = productData.destacado;
                         productFormTitle.textContent = 'Editar Producto';
                         productCancelButton.classList.remove('hidden');
@@ -462,22 +498,12 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- CARGA INICIAL ---
-    fetchProducts();
-    fetchCategories();
-    fetchBlogPosts();
-    fetchBanners();
+    
 
     // =================================================================
     // Estilos y animaciones Header
     // =================================================================
 
-    // Seleccionamos los elementos con los que vamos a trabajar
-    const navLinks = document.querySelectorAll('.main-nav a[data-target]');
-    const adminSections = document.querySelectorAll('.admin-section');
-    const backToMenuButtons = document.querySelectorAll('.back-to-menu-btn');
-    const menuGrid = document.getElementById('admin-menu');
-    const menuCards = document.querySelectorAll('.menu-card[data-target]');
 
     // Función para ocultar todas las secciones
     function hideAllSections() {
@@ -551,14 +577,222 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })();
 
-});
+    // Función para subir una imagen de País al Storage de Supabase
+    const uploadCountryImage = async (file, countryName) => {
+        const filePath = `countries/${countryName.toLowerCase().replace(/\s/g, '-')}-${Date.now()}.jpg`;
+        const { data, error } = await supabase.storage
+            .from('product-images') // Asumo que este es el nombre de tu bucket público
+            .upload(filePath, file, {
+                cacheControl: '3600',
+                upsert: false
+            });
 
-//botón hamburguesa
-document.addEventListener('DOMContentLoaded', function () {
-    const hamburgerBtn = document.querySelector('.hamburger-btn');
-    const mainNav = document.querySelector('.main-nav');
-    hamburgerBtn.addEventListener('click', function () {
-        mainNav.classList.toggle('open');
+        if (error) {
+            console.error('Error al subir la imagen del país:', error);
+            throw new Error('Error al subir la imagen.');
+        }
+        // Construye la URL pública
+        return `${supabaseUrl}/storage/v1/object/public/product-images/${data.path}`;
+    };
+    // =================================================================
+    // Función para cargar y mostrar los Países en la tabla
+    // =================================================================
+    const fetchAndDisplayCountries = async () => {
+        const { data: paises, error } = await supabase
+            .from('paises')
+            .select('*')
+            .order('nombre', { ascending: true });
+
+        if (error) {
+            console.error('Error al cargar países:', error);
+            countryTableBody.innerHTML = `<tr><td colspan="4">Error al cargar datos.</td></tr>`;
+            return;
+        }
+
+        countryTableBody.innerHTML = '';
+        console.log('Países cargados:', paises);
+        paises.forEach(pais => {
+            const row = countryTableBody.insertRow();
+            row.innerHTML = `
+                <td>${pais.id}</td>
+                <td>${pais.nombre}</td>
+                <td>
+                    <button class="edit-btn" data-id="${pais.id}"><i class="fas fa-edit"></i> Editar</button>
+                    <button class="delete-btn" data-id="${pais.id}" data-name="${pais.nombre}"><i class="fas fa-trash"></i> Eliminar</button>
+                </td>
+            `;
+
+            // Agregar listeners a los botones de Editar y Eliminar
+            row.querySelector('.edit-btn').addEventListener('click', () => editCountry(pais));
+            row.querySelector('.delete-btn').addEventListener('click', () => deleteCountry(pais.id, pais.nombre, pais.imagen_url));
+        });
+    };
+
+    // Lógica para guardar (insertar o actualizar) un País
+    countryForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        countrySaveButton.disabled = true;
+        countrySaveButton.textContent = 'Guardando...';
+
+        const countryId = countryIdInput.value;
+        const countryName = countryNameInput.value.trim();
+        const imageFile = countryImageInput.files[0];
+        let imageUrl = currentCountryImage.src; // URL actual si es edición y no se sube nueva imagen
+
+        try {
+            // 1. Subir la imagen si se selecciona un nuevo archivo
+            if (imageFile) {
+                imageUrl = await uploadCountryImage(imageFile, countryName);
+            } else if (!countryId) {
+                 // Si es nuevo registro y no hay imagen, forzar un error o usar un placeholder
+                 alert('Por favor, selecciona una imagen para el nuevo país.');
+                 return;
+            }
+
+            // 2. Preparar el objeto de datos
+            const countryData = {
+                nombre: countryName,
+                imagen_url: imageUrl,
+            };
+
+            let response;
+            if (countryId) {
+                // UPDATE (Actualizar)
+                response = await supabase
+                    .from('paises')
+                    .update(countryData)
+                    .eq('id', countryId);
+            } else {
+                // INSERT (Insertar nuevo)
+                response = await supabase
+                    .from('categorias_paises')
+                    .insert([countryData]);
+            }
+
+            if (response.error) throw response.error;
+
+            alert(`País ${countryId ? 'actualizado' : 'agregado'} con éxito.`);
+            countryForm.reset();
+            countryIdInput.value = '';
+            currentCountryImage.src = '';
+            countryImagePreviewContainer.classList.add('hidden');
+            countryFormTitle.textContent = 'Agregar Nuevo País';
+            countryCancelButton.classList.add('hidden');
+            fetchAndDisplayCountries();
+
+        } catch (error) {
+            console.error('Error al guardar país:', error);
+            alert('Hubo un error al guardar el país: ' + error.message);
+        } finally {
+            countrySaveButton.disabled = false;
+            countrySaveButton.textContent = 'Guardar País';
+        }
     });
+
+    // Función para configurar el formulario para edición
+    const editCountry = (pais) => {
+        // --- Lógica de visualización del administrador ---
+        // Oculta todas las secciones de administración
+        hideAllSections(); 
+        // Oculta la cuadrícula del menú principal
+        menuGrid.classList.add('hidden'); // <-- ¡LÍNEA AÑADIDA para ocultar el menú de tarjetas!
+        // Muestra la sección de gestión de países
+        document.getElementById('countries-section').classList.remove('hidden'); 
+        // Mueve la vista al formulario
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        
+        // --- Lógica del formulario de edición ---
+        countryIdInput.value = pais.id;
+        countryNameInput.value = pais.nombre;
+        countryFormTitle.textContent = `Editar País: ${pais.nombre}`;
+        countrySaveButton.textContent = 'Actualizar País';
+        countryCancelButton.classList.remove('hidden');
+        countryImageInput.value = null; // Limpiar el input file
+
+        if (pais.imagen_url) {
+            currentCountryImage.src = pais.imagen_url;
+            countryImagePreviewContainer.classList.remove('hidden');
+        } else {
+            currentCountryImage.src = '';
+            countryImagePreviewContainer.classList.add('hidden');
+        }
+
+        // Evento para cancelar edición
+        countryCancelButton.onclick = () => {
+            countryForm.reset();
+            countryIdInput.value = '';
+            countryFormTitle.textContent = 'Agregar Nuevo País';
+            countrySaveButton.textContent = 'Guardar País';
+            countryCancelButton.classList.add('hidden');
+            countryImagePreviewContainer.classList.add('hidden');
+        };
+    };
+
+    // Función para eliminar un País
+    const deleteCountry = async (id, name, imageUrl) => {
+        if (!confirm(`¿Estás seguro de que quieres eliminar el país "${name}"?`)) {
+            return;
+        }
+
+        try {
+            // 1. Eliminar de la base de datos
+            const { error: dbError } = await supabase
+                .from('categorias_paises')
+                .delete()
+                .eq('id', id);
+
+            if (dbError) throw dbError;
+
+            // Opcional: Implementar la eliminación del archivo del Storage
+            // Esto requiere extraer el 'filePath' de la 'imageUrl', lo omitimos por simplicidad.
+            
+            alert(`País "${name}" eliminado con éxito.`);
+            fetchAndDisplayCountries();
+
+        } catch (error) {
+            console.error('Error al eliminar país:', error);
+            alert('Hubo un error al eliminar el país: ' + error.message);
+        }
+    };
+
+    // =================================================================
+    // ✅ LÓGICA PARA PAÍSES (NUEVO BLOQUE)
+    // =================================================================
+    const populateCountryDropdown = (countries) => {
+        productCountrySelect.innerHTML = '<option value="" disabled selected>Selecciona el país de origen</option>';
+        countries.forEach(country => {
+            const option = document.createElement('option');
+            option.value = country.id; // Usamos el UUID del país
+            option.textContent = country.nombre;
+            productCountrySelect.appendChild(option);
+        });
+    };
+
+    const fetchCountries = async () => {
+        // Obtenemos id y nombre de la tabla paises
+        const { data, error } = await supabase
+            .from('paises')
+            .select('id, nombre')
+            .order('nombre', { ascending: true });
+            
+        if (error) {
+            console.error('Error fetching countries:', error);
+        } else {
+            populateCountryDropdown(data);
+        }
+    };
+
+
+    // --- CARGA INICIAL ---
+    fetchProducts();
+    fetchCategories();
+    fetchBlogPosts();
+    fetchBanners();
+    fetchCountries();
+    fetchAndDisplayCountries();
 });
+// =================================================================
+// Fin de la lógica para gestión de Países
+// =================================================================
+
 

@@ -769,6 +769,139 @@ body {
     font-size: 1.1rem;
     font-weight: 600;
 }
+/****************************** ESTILOS DE PÁGINA DE BLOG *************************************/
+
+/* Estilo general para banners internos de páginas (productos, blog, etc.) */
+.page-banner {
+    width: 100vw;
+    height: 300px; /* Altura más compacta que el banner principal */
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: calc(-50vw + 50%);
+    margin-bottom: 40px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.blog-main-banner {
+    /* Fondo que evoca arte y cultura. Asegúrate de reemplazar 'img/blog-hero-image.jpg' */
+    background-image: url('img/blog-hero-image.jpg'); 
+    background-color: #b99d6b; /* Color de acento de fallback */
+}
+
+.banner-overlay {
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.banner-content {
+    text-align: center;
+    color: #fff;
+    width: 90%;
+    max-width: 800px;
+}
+
+.page-banner-title {
+    font-size: 3rem;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    letter-spacing: 3px;
+    margin-bottom: 15px;
+    text-transform: uppercase;
+}
+
+.page-banner-desc {
+    font-size: 1.2rem;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    opacity: 0.9;
+}
+
+.full-blog-section {
+    max-width: 1200px;
+    margin: 0 auto 60px auto;
+    padding: 0 5%;
+}
+
+.blog-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.blog-posts-grid-full {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+}
+
+/* Estilos para las tarjetas de blog en la página de listado completo */
+.blog-post-card-full {
+    background-color: #fff;
+    text-align: left;
+    text-decoration: none;
+    color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: block; 
+}
+
+.blog-post-card-full:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+}
+
+.blog-post-card-full img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.blog-post-content {
+    padding: 20px;
+}
+
+.blog-post-content h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.blog-post-content p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 15px;
+    line-height: 1.5;
+    /* Para truncar el texto */
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.blog-post-content .read-more {
+    display: inline-block;
+    color: #E55900;
+    font-weight: 600;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+.blog-post-content .read-more:hover {
+    color: #c44a00;
+    text-decoration: underline;
+}
 
 /* --- ESTILOS PARA MÓVILES (DISEÑO RESPONSIVO) --- */
 @media (max-width: 768px) {
@@ -831,7 +964,260 @@ body {
     .sobre-nosotros-section p {
         font-size: 1rem;
     }
+
+    .page-banner-title {
+        font-size: 2rem;
+    }
+
+    .page-banner-desc {
+        font-size: 1rem;
+    }
+
+    .full-blog-section {
+        padding: 0 20px;
+    }
+
 }
+
+/****************************** ESTILOS DE PÁGINA DE DETALLE DE POST (post.html) *************************************/
+
+.post-main-content {
+    max-width: 900px;
+    margin: 40px auto 80px auto;
+    padding: 0 5%;
+}
+
+.blog-post-detail {
+    background-color: #fff;
+    padding: 30px 0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.loading-state {
+    text-align: center;
+    padding: 50px;
+    font-family: 'Raleway', sans-serif;
+    color: #b99d6b;
+    font-size: 1.2rem;
+}
+
+.loading-state .fa-spin {
+    margin-left: 10px;
+}
+
+.post-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding: 0 30px;
+}
+
+.post-title-detail {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    font-size: 3rem; /* Más grande para el titular principal */
+    color: #333;
+    line-height: 1.2;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.post-meta {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.95rem;
+    color: #777;
+    text-transform: none;
+}
+
+.post-featured-image {
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.post-featured-image img {
+    width: 100%;
+    max-height: 500px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.post-featured-image figcaption {
+    text-align: center;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: #999;
+    margin-top: 10px;
+}
+
+.post-content-body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.7;
+    color: #444;
+    padding: 0 30px; 
+}
+
+/* Estilos para el contenido inyectado (párrafos, listas, etc.) */
+.post-content-body h2 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    margin-top: 35px;
+    margin-bottom: 15px;
+    color: #E55900; /* Color de acento para subtítulos */
+}
+
+.post-content-body h3 {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-top: 25px;
+    margin-bottom: 15px;
+}
+
+.post-content-body p {
+    margin-bottom: 1.5em;
+    text-align: justify;
+}
+
+.post-content-body ul, .post-content-body ol {
+    margin-bottom: 1.5em;
+    margin-left: 20px;
+}
+
+.post-content-body blockquote {
+    border-left: 4px solid #b99d6b;
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    margin: 20px 0;
+    font-style: italic;
+    color: #555;
+}
+
+.post-share-section {
+    padding: 20px 30px;
+    margin-top: 30px;
+    border-top: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+}
+
+/* Sección de Posts Relacionados */
+.related-posts-section {
+    margin-top: 50px;
+    padding: 0 30px;
+    text-align: center;
+}
+
+.related-posts-section .section-title-small {
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: #333;
+    margin-bottom: 30px;
+    text-transform: uppercase;
+}
+
+.back-to-blog-link {
+    margin-top: 40px;
+}
+
+.back-btn-detail {
+    /* Reutiliza el estilo del botón del index, pero con un color de acento */
+    background: #E55900;
+    color: #fff;
+    border-color: #E55900;
+    padding: 12px 30px;
+    text-transform: uppercase;
+}
+
+.back-btn-detail:hover {
+    background-color: #c44a00;
+    border-color: #c44a00;
+    color: #fff;
+}
+
+/****************************** ESTILOS DE ARTESANÍA DEL MUNDO *************************************/
+
+.international-products-section {
+    padding: 60px 0; /* padding vertical, el horizontal lo manejará el wrapper */
+    background-color: #f8f5f1; /* Fondo ligero para la sección */
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.international-content-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row; /* Imagen a la izquierda, texto a la derecha por defecto */
+    align-items: center;
+    gap: 50px; /* Espacio entre la imagen y el texto */
+    padding: 0 5%; /* Padding horizontal para evitar que el contenido toque los bordes */
+}
+
+.international-image-container {
+    flex: 1; /* La imagen ocupa la mitad del espacio disponible */
+    min-width: 400px; /* Tamaño mínimo para la imagen en desktop */
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15); /* Sombra para dar profundidad */
+    border-radius: 8px; /* Bordes redondeados */
+    overflow: hidden; /* Asegura que la imagen no se salga de los bordes redondeados */
+}
+
+.international-main-image {
+    width: 100%;
+    height: 400px; /* Altura fija para la imagen, se ajustará el objeto */
+    object-fit: cover; /* Recorta la imagen para que llene el contenedor sin distorsionarse */
+    display: block; /* Elimina el espacio extra debajo de la imagen */
+}
+
+.international-text-container {
+    flex: 1; /* El texto ocupa la otra mitad del espacio disponible */
+    text-align: left; /* Alineación del texto a la izquierda */
+}
+
+.international-title {
+    font-size: 2.5rem; /* Título más grande y prominente */
+    margin-bottom: 20px;
+    color: #333;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 700;
+    letter-spacing: 2px;
+}
+
+.international-description {
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.15rem;
+    line-height: 1.8;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+.international-btn {
+    /* Reutiliza .section-btn, pero ajustamos un poco el color para que destaque */
+    background-color: #E55900; /* Un naranja fuerte */
+    color: #fff;
+    border: 2px solid #E55900;
+    padding: 14px 40px;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    transition: all 0.3s ease;
+}
+
+.international-btn:hover {
+    background-color: #c44a00; /* Un poco más oscuro al pasar el mouse */
+    border-color: #c44a00;
+    transform: translateY(-2px); /* Pequeño efecto de levantamiento */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* El contenido (galería) reutiliza las clases de .categoria-card y .blog-posts-grid-full 
+   para la disposición en cuadrícula (grid) y los estilos de las tarjetas, manteniendo la coherencia. */
 
 @media (max-width: 700px) {
     .sobre-nosotros-section {
@@ -844,6 +1230,28 @@ body {
 
     .sobre-nosotros-section p {
         font-size: 1rem;
+    }
+    .post-main-content {
+        margin: 20px auto 40px auto;
+    }
+    .post-title-detail {
+        font-size: 2rem;
+    }
+    .post-content-body {
+        font-size: 1rem;
+        padding: 0 15px;
+    }
+    .post-content-body h2 {
+        font-size: 1.5rem;
+    }
+    .post-content-body h3 {
+        font-size: 1.3rem;
+    }
+    .post-share-section {
+        padding: 15px;
+    }
+    .related-posts-section {
+        padding: 0 15px;
     }
 }
 
@@ -879,5 +1287,38 @@ body {
     .categoria-card .categoria-btn {
         font-size: 1rem;
         padding: 10px 22px;
+    }
+    .international-content-wrapper {
+        flex-direction: column; /* Apila la imagen y el texto en columnas */
+        gap: 30px;
+        padding: 0 20px; /* Más padding en móviles */
+    }
+
+    .international-image-container {
+        min-width: unset; /* Quita el mínimo para que se ajuste */
+        width: 100%;
+    }
+
+    .international-main-image {
+        height: 280px; /* Ajusta la altura en móviles */
+    }
+
+    .international-text-container {
+        text-align: center; /* Centra el texto en móviles */
+    }
+
+    .international-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .international-description {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    .international-btn {
+        padding: 12px 30px;
+        font-size: 0.95rem;
     }
 }

@@ -35,6 +35,35 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
+    //---- Lógica para mostrar productos internacionales destacados------
+
+    const fetchAndDisplayInternationalProducts = async () => {
+        const internationalImage = document.getElementById('international-main-image');
+        if (!internationalImage) return;
+
+        // Podrías obtener una imagen aleatoria, o la primera, o una específica.
+        // Por simplicidad, obtendremos la primera imagen de la tabla 'categorias_paises' 
+        // que NO sea de México.
+        const { data: paises, error } = await supabase
+            .from('paises') 
+            .select('imagen_url')
+            .neq('nombre', 'México') 
+            .limit(1); // Solo necesitamos una imagen destacada
+
+
+        if (error) {
+            console.error('Error fetching international image:', error);
+            // Si hay un error, dejamos la imagen de placeholder o puedes poner una de fallback
+            return;
+        }
+        //paises.length > 0 && paises[0].imagen_url
+        if (paises.length > 0 ) {
+            internationalImage.src = "https://xqkrmcakdpgfmqwdiszs.supabase.co/storage/v1/object/public/product-images/countries/2025-11-11T05-43-38.png";
+        } else {
+            // Fallback si no hay imágenes o la consulta no devuelve nada
+            internationalImage.src = 'https://via.placeholder.com/600x400?text=Artesania+Internacional+Fallback';
+        }
+    };
 
     // --- LÓGICA PARA EL SLIDESHOW DEL BANNER ---
 
@@ -223,12 +252,6 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
 
-    // --- LLAMADAS A LAS FUNCIONES ---
-    initializeBannerSlideshow();
-    fetchAndDisplayCategories();
-    fetchAndDisplayFeaturedProducts();
-    fetchAndDisplayBlogPosts();
-
     // --- LÓGICA DEL MENÚ HAMBURGUESA ---
     const hamburgerBtn = document.querySelector('.hamburger-btn');
     const mainNav = document.querySelector('.main-nav');
@@ -237,5 +260,12 @@ document.addEventListener('DOMContentLoaded', () => {
             mainNav.classList.toggle('open');
         });
     }
+
+    // --- LLAMADAS A LAS FUNCIONES ---
+    initializeBannerSlideshow();
+    fetchAndDisplayCategories();
+    fetchAndDisplayInternationalProducts();
+    fetchAndDisplayFeaturedProducts();
+    fetchAndDisplayBlogPosts();
 
 });

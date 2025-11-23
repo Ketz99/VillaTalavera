@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="css/index.css">
     <link rel="shortcut icon" href="img/logo-corto.png" type="image/x-icon">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-    <script src="js/supabaseClient.js"></script>
 </head>
 
 <body>
@@ -64,6 +63,7 @@
                 <li><a href="#!" data-target="categories-section">CATEGORÍAS</a></li>
                 <li><a href="#!" data-target="blog-section">BLOG</a></li>
                 <li><a href="#!" data-target="banners-section">BANNERS</a></li>
+                <li><a href="#!" data-target="countries-section">PAISES</a></li>
             </ul>
         </nav>
     </header>
@@ -90,6 +90,13 @@
                 <h3>Banners</h3>
                 <p>Gestionar los banners promocionales de la página de inicio.</p>
             </div>
+            <div class="menu-card" data-target="countries-section">
+                <i class="fa-solid fa-globe-americas menu-card-icon"></i>
+                <h3>Gestión de Países</h3>
+                <p>Gestionar los origenes de los productos que se ven en la tienda.</p>
+                </a>
+            </div>
+
         </div>
 
         <section id="products-section" class="admin-section hidden">
@@ -119,6 +126,9 @@
                     <input type="text" id="nombre" placeholder="Nombre del producto" required>
                     <select id="product-category" required>
                         <option value="">Cargando categorías...</option>
+                    </select>
+                    <select id="product-country" required>
+                        <option value="" disabled selected>Selecciona el país de origen</option>
                     </select>
                     <textarea id="descripcion" placeholder="Descripción"></textarea>
                     <input type="number" id="precio" placeholder="Precio" step="0.01" required>
@@ -273,10 +283,52 @@
                 </form>
             </div>
         </section>
+        <section id="countries-section" class="admin-section hidden">
+            <button class="back-to-menu-btn"><i class="fa-solid fa-arrow-left"></i> Volver al Menú</button>
+            <h2><i class="fas fa-globe-americas"></i> Gestión de Países</h2>
+            <div class="table-container">
+                <h3>Lista de Países Registrados</h3>
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Nombre</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody id="country-table-body">
+                    </tbody>
+                </table>
+            </div>
+            <div class="form-container">
+                <h3 id="country-form-title">Agregar Nuevo País</h3>
+                <form id="country-form">
+                    <input type="hidden" id="country-id">
+
+                    <label for="country-name">Nombre del País:</label>
+                    <input type="text" id="country-name" placeholder="Ej: Colombia, Perú, Ecuador" required>
+
+                    <label for="country-image">Imagen del País (Destacado en Home):</label>
+                    <input type="file" id="country-image" accept="image/png, image/jpeg">
+
+                    <div id="country-image-preview-container" class="hidden">
+                        <p>Imagen actual:</p>
+                        <div class="image-thumbnail">
+                            <img id="current-country-image" src="" alt="Imagen actual del País">
+                        </div>
+                    </div>
+
+                    <div class="form-buttons">
+                        <button type="submit" id="save-country-button">Guardar País</button>
+                        <button type="button" id="cancel-country-button" class="hidden">Cancelar Edición</button>
+                    </div>
+                </form>
+            </div>
+        </section>
     </main>
 
 
-
+    <script src="js/supabaseClient.js"></script>
     <script src="js/footer.js"></script>
     <script src="js/admin.js"></script>
 </body>
