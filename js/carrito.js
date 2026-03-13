@@ -117,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const scriptBold = document.createElement('script');
             scriptBold.src = 'https://checkout.bold.co/library/boldPaymentButton.js';
             scriptBold.setAttribute('data-bold-button', 'bold-payment-button');
-            scriptBold.setAttribute('data-api-key', 'pub_test_VrcMMs5yN0fo0MZmEWwlU_cbeIOQpjdg3Txb-nrn90Q'); // Tu llave pública
+            scriptBold.setAttribute('data-api-key', 'VrcMMs5yN0fo0MZmEWwlU_cbeIOQpjdg3Txb-nrn90Q'); // Tu llave pública
             scriptBold.setAttribute('data-amount', totalVenta);
             scriptBold.setAttribute('data-currency', 'COP');
             scriptBold.setAttribute('data-order-id', orderId);
