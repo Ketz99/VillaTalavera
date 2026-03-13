@@ -47,13 +47,17 @@ document.addEventListener('DOMContentLoaded', () => {
                     <strong id="cart-total">$${total.toLocaleString('es-CO')}</strong>
                 </div>
                 <button class="checkout-btn">Finalizar Compra</button>
+                
+                <div id="contenedor-bold" style="margin-top: 15px; text-align: center;"></div>
             </div>
         `;
 
+        // Añadir eventos a los botones recién creados en el DOM
         addEventListeners();
     };
 
     const addEventListeners = () => {
+        // Eventos para eliminar items
         document.querySelectorAll('.cart-item-remove-btn').forEach(button => {
             button.addEventListener('click', (e) => {
                 const productId = e.target.closest('.cart-item').dataset.id;
@@ -62,6 +66,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Eventos para cambiar cantidades
         document.querySelectorAll('.quantity-input').forEach(input => {
             input.addEventListener('change', (e) => {
                 const productId = e.target.closest('.cart-item').dataset.id;
@@ -70,7 +75,64 @@ document.addEventListener('DOMContentLoaded', () => {
                 renderCart(); // Re-render
             });
         });
+
+        // NUEVO: Evento para el botón de "Finalizar Compra" asignado AQUÍ
+        const checkoutBtn = document.querySelector('.checkout-btn');
+        if (checkoutBtn) {
+            checkoutBtn.addEventListener('click', procesarPago);
+        }
     };
 
+    async function procesarPago() {
+        const carrito = getCart();
+        if (carrito.length === 0) return;
+
+        // 1. Preparamos los datos
+        const totalVenta = carrito.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+        const orderId = `VT-${Date.now()}`;
+        const contenedorBoton = document.getElementById('contenedor-bold');
+        const checkoutBtn = document.querySelector('.checkout-btn');
+
+        // Mostrar un mensaje de carga y ocultar el botón original
+        checkoutBtn.style.display = 'none';
+        contenedorBoton.innerHTML = '<p><i class="fas fa-spinner fa-spin"></i> Conectando con pasarela segura...</p>';
+
+        try {
+            // 2. Llamamos a nuestra Edge Function en Supabase
+            const { data, error } = await supabase.functions.invoke('bold-hash', {
+                body: {
+                    orderId: orderId,
+                    amount: totalVenta,
+                    currency: 'COP'
+                }
+            });
+
+            if (error) throw error;
+
+            const hashDeIntegridad = data.hash;
+
+            // 3. Inyectamos el botón de Bold
+            contenedorBoton.innerHTML = ''; // Limpiamos el texto de carga
+
+            const scriptBold = document.createElement('script');
+            scriptBold.src = 'https://checkout.bold.co/library/boldPaymentButton.js';
+            scriptBold.setAttribute('data-bold-button', 'bold-payment-button');
+            scriptBold.setAttribute('data-api-key', 'pub_test_VrcMMs5yN0fo0MZmEWwlU_cbeIOQpjdg3Txb-nrn90Q'); // Tu llave pública
+            scriptBold.setAttribute('data-amount', totalVenta);
+            scriptBold.setAttribute('data-currency', 'COP');
+            scriptBold.setAttribute('data-order-id', orderId);
+            scriptBold.setAttribute('data-integrity-signature', hashDeIntegridad);
+            scriptBold.setAttribute('data-redirection-url', 'https://ketz99.github.io/VillaTalavera/confirmacion.html');
+
+            contenedorBoton.appendChild(scriptBold);
+
+        } catch (err) {
+            console.error("Error al generar seguridad del pago:", err);
+            contenedorBoton.innerHTML = '<p style="color: red;">Error al cargar la pasarela. Intenta de nuevo.</p>';
+            checkoutBtn.style.display = 'block'; // Volver a mostrar el botón si hay error
+        }
+    }
+
+    // Inicializar el carrito al cargar la página
     renderCart();
 });
