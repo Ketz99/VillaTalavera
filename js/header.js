@@ -41,6 +41,7 @@ header.innerHTML = `
       <li><a href="index.html" data-target="site-header">Inicio</a></li>
       <li><a href="index.html#categories-section" data-target="categories-section">Artesanias</a></li>
       <li><a href="index.html#about-us-section" data-target="blog-section">Nosotros</a></li>
+      <li><a href="index.html#blog-section" data-target="blog-section">Blog</a></li>
       <li><a href="#footer" data-target="banners-section">Contacto</a></li>
     </ul>
   </nav>
