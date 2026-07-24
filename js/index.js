@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         <span class="main-banner-coleccion">${banner.subtitulo || 'Nueva Colección'}</span>
                         <h1 class="main-banner-title">${banner.titulo || ''}</h1>
                         <span class="main-banner-desc">Piezas hechas a mano</span>
-                        <a href="${banner.url_enlace || '#'}" class="main-banner-btn">VITRINEA AQUÍ</a>
+                        <a href="${banner.url_enlace || '#'}" class="main-banner-btn">Mira la colección</a>
                     </div>
                 </div>
             `;
@@ -114,7 +114,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
         bannerContainer.appendChild(slider);
 
+        if (allBanners.length > 1) {
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'banner-nav-btn prev-btn';
+            prevBtn.innerHTML = '&#10094;'; 
+            prevBtn.addEventListener('click', () => moverBannerManualmente(-1));
+
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'banner-nav-btn next-btn';
+            nextBtn.innerHTML = '&#10095;'; 
+            nextBtn.addEventListener('click', () => moverBannerManualmente(1));
+
+            bannerContainer.appendChild(prevBtn);
+            bannerContainer.appendChild(nextBtn);
+        }
+
         startBannerInterval();
+    };
+
+    const actualizarPosicionBanner = () => {
+        if (slider) slider.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
     };
 
     const nextBanner = () => {
@@ -122,12 +141,25 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentBannerIndex >= allBanners.length) {
             currentBannerIndex = 0;
         }
-        if (slider) slider.style.transform = `translateX(-${currentBannerIndex * 100}%)`;
+        actualizarPosicionBanner();
+    };
+
+    const moverBannerManualmente = (direccion) => {
+        currentBannerIndex += direccion;
+        
+        if (currentBannerIndex >= allBanners.length) {
+            currentBannerIndex = 0;
+        } else if (currentBannerIndex < 0) {
+            currentBannerIndex = allBanners.length - 1;
+        }
+        
+        actualizarPosicionBanner();
+        startBannerInterval(); // Reinicia el tiempo para que no salte justo después del clic
     };
 
     const startBannerInterval = () => {
         if (bannerInterval) clearInterval(bannerInterval);
-        bannerInterval = setInterval(nextBanner, 5000);
+        bannerInterval = setInterval(nextBanner, 10000);
     };
 
     // --- LÓGICA PARA PRODUCTOS DESTACADOS ---

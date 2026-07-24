@@ -482,6 +482,39 @@ body {
     transition: transform 0.8s ease-in-out;
 }
 
+/* Estilos de los botones del banner */
+.banner-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(255, 255, 255, 0.3);
+    color: #333;
+    border: none;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.banner-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #000;
+}
+
+.banner-nav-btn.prev-btn {
+    left: 20px;
+}
+
+.banner-nav-btn.next-btn {
+    right: 20px;
+}
+
 #categorias-galeria {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
@@ -953,6 +986,47 @@ body {
         padding: 16px 0;
     }
 
+    .main-banner-content {
+        padding: 10px; /* Da un poco más de aire en móviles */
+    }
+
+    .main-banner-coleccion {
+        font-size: 14px; /* Letra más pequeña para el subtítulo */
+        margin-bottom: 8px;
+    }
+
+    .main-banner-title {
+        font-size: 18px; /* Reduce el tamaño del título principal */
+        line-height: 1.2; /* Evita que las líneas se encimen si el texto cae en dos renglones */
+        margin-bottom: 10px;
+    }
+
+    .main-banner-desc {
+        font-size: 16px; /* Ajuste para la descripción */
+        margin-bottom: 15px;
+    }
+
+    .main-banner-btn {
+        font-size: 14px; /* Botón ligeramente más compacto */
+        padding: 10px 20px;
+    }
+
+    /* 2. Ajustes para los textos de "Más Vendidos" (Productos Destacados) */
+    .featured-product-card {
+        padding: 10px; /* Reduce el padding interno de la tarjeta si lo tiene */
+    }
+
+    .featured-product-card h3 {
+        font-size: 16px; /* Tamaño del título del producto más pequeño */
+        margin-top: 10px;
+        margin-bottom: 5px;
+    }
+
+    .featured-product-card p {
+        font-size: 14px; /* Tamaño del precio más discreto */
+        font-weight: bold; /* Opcional: mantener el precio resaltado */
+    }
+
     .sobre-nosotros-section {
         padding: 10px 8px;
     }
@@ -975,6 +1049,19 @@ body {
 
     .full-blog-section {
         padding: 0 20px;
+    }
+    .banner-nav-btn {
+        width: 32px;
+        height: 32px;
+        font-size: 16px;
+    }
+    
+    .banner-nav-btn.prev-btn {
+        left: 10px;
+    }
+    
+    .banner-nav-btn.next-btn {
+        right: 10px;
     }
 
 }
@@ -1253,21 +1340,109 @@ body {
     .related-posts-section {
         padding: 0 15px;
     }
+    .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    }
 }
 
 @media (max-width: 900px) {
-    .main-banner-title {
-        font-size: 2.2rem;
+   /* Permitir que el banner se adapte en altura según el contenido y no quede cortado */
+    .main-banner {
+        width: 100vw;
+        height: auto;
+        min-height: 320px;
+        max-height: none;
+        margin-left: calc(-50vw + 50%);
+    }
+
+    /* Asegurar que el overlay cubra todo sin forzar un height de 100vh que desborde */
+    .main-banner-overlay {
+        width: 100%;
+        height: 100%;
+        padding: 40px 20px;
     }
 
     .main-banner-content {
-        max-width: 95vw;
+        max-width: 100%;
+        padding: 10px;
     }
 
-    .main-banner {
-        height: 220px;
-        min-height: 180px;
-        max-height: 320px;
+    .main-banner-coleccion {
+        font-size: 0.9rem; /* Subtítulo visible y proporcionado arriba */
+        letter-spacing: 1.5px;
+        margin-bottom: 6px;
+    }
+
+    .main-banner-title {
+        font-size: 1.8rem; /* Título adaptado a teléfonos, ni muy grande ni escondido */
+        line-height: 1.25;
+        letter-spacing: 1px;
+        margin-bottom: 10px;
+    }
+
+    .main-banner-desc {
+        font-size: 1rem; /* Descripción visible y espaciada correctamente */
+        margin-bottom: 20px;
+    }
+
+    .main-banner-btn {
+        font-size: 0.95rem;
+        padding: 10px 24px;
+    }
+
+    /* Ajustes generales móviles que ya tenías o complementarios */
+    #categorias-galeria {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .categoria-card {
+        min-height: 220px;
+    }
+
+    .categoria-card .categoria-titulo {
+        font-size: 1.3rem;
+        margin-bottom: 18px;
+    }
+
+    .categoria-card .categoria-btn {
+        font-size: 1rem;
+        padding: 10px 22px;
+    }
+
+    .international-content-wrapper {
+        flex-direction: column;
+        gap: 30px;
+        padding: 0 20px;
+    }
+
+    .international-image-container {
+        min-width: unset;
+        width: 100%;
+    }
+
+    .international-main-image {
+        height: 280px;
+    }
+
+    .international-text-container {
+        text-align: center;
+    }
+
+    .international-title {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .international-description {
+        font-size: 1rem;
+        margin-bottom: 25px;
+    }
+
+    .international-btn {
+        padding: 12px 30px;
+        font-size: 0.95rem;
     }
 
     #categorias-galeria {
@@ -1320,5 +1495,10 @@ body {
     .international-btn {
         padding: 12px 30px;
         font-size: 0.95rem;
+    }
+
+    .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
     }
 }
